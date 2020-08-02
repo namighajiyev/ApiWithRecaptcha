@@ -49,6 +49,20 @@ namespace ApiWithRecaptcha
 
             var reaptchaSecretKey = Configuration.GetValue<string>("ApiWithRecaptcha:RecaptchaSettings:SecretKey");
             var reaptchaSiteKey = Configuration.GetValue<string>("ApiWithRecaptcha:RecaptchaSettings:SiteKey");
+            var reaptchaV2TickBoxSecretKey = Configuration.GetValue<string>("ApiWithRecaptcha:V2TickboxRecaptchaSettings:SecretKey");
+            var reaptchaV2TickBoxSiteKey = Configuration.GetValue<string>("ApiWithRecaptcha:V2TickboxRecaptchaSettings:SiteKey");
+            var reaptchaV2InvisibleSecretKey = Configuration.GetValue<string>("ApiWithRecaptcha:V2InvisibleRecaptchaSettings:SecretKey");
+            var reaptchaV2InvisibleSiteKey = Configuration.GetValue<string>("ApiWithRecaptcha:V2InvisibleRecaptchaSettings:SiteKey");
+
+            services.Configure<RecaptchaOptions>(opt =>
+            {
+                opt.V3SecretKey = reaptchaSecretKey;
+                opt.V3SiteKey = reaptchaSiteKey;
+                opt.V2TickBoxSecretKey = reaptchaV2TickBoxSecretKey;
+                opt.V2TickBoxSiteKey = reaptchaV2TickBoxSiteKey;
+                opt.V2InvisibleSecretKey = reaptchaV2InvisibleSecretKey;
+                opt.V2InvisibleSiteKey = reaptchaV2InvisibleSiteKey;
+            });
 
             services.AddRecaptcha(options =>
                     {
